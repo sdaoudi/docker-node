@@ -27,3 +27,11 @@ You can use ``/src`` as a working directory:
 This docker image uses ``node`` as default user:
 
 	$ docker run --rm -ti sdaoudi/node:8 whoami
+
+## Build command ##
+
+You can build a node image with this command:
+
+```
+$ make build NODE_VERSION=8
+```
