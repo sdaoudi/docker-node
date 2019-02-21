@@ -1,18 +1,16 @@
 # Node.js Docker image #
 
+[![Build Status](https://travis-ci.org/sdaoudi/docker-node.svg?branch=master)](https://travis-ci.org/sdaoudi/docker-node)
+
 A minimal Dockerfile based on Node.js alpine docker
 image.
 
 ## What's included ##
 
-- Node.js v8 and v10
+- Node.js v8
 - npm v6
 
 ## Usage examples ##
-
-Node.js 10 example:
-
-    $ docker run --rm -ti sdaoudi/node:10 node -v
 
 Node.js 8 example:
 
@@ -26,6 +24,6 @@ You can use ``/src`` as a working directory:
 
 ## Default user ##
 
-We use ``node`` as default user of this image:
+This docker image uses ``node`` as default user:
 
-	$ docker run --rm -ti sdaoudi/node:10 whoami
+	$ docker run --rm -ti sdaoudi/node:8 whoami
