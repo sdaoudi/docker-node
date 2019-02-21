@@ -53,14 +53,14 @@ all: ## Do the action to all node.js version (8 & 10)
 
 #####
 build: ## Build an individual image (NODE_VERSION)
-	  ${DOCKER} build --no-cache ${PROXY_CONFIG} ${BUILD_ARGS} --tag ${DOCKER_REPOSITORY}:node-${NODE_VERSION}-alpine .
+	  ${DOCKER} build --no-cache ${PROXY_CONFIG} ${BUILD_ARGS} --tag ${DOCKER_REPOSITORY}:${NODE_VERSION}-alpine .
 
 #####
 deploy: push ## Deploy a specific version
 
 #####
 push: ## push a specific version (NODE_VERSION)
-	${DOCKER} push ${DOCKER_REPOSITORY}:node-${NODE_VERSION}-alpine
+	${DOCKER} push ${DOCKER_REPOSITORY}:${NODE_VERSION}-alpine
 
 #####
 clean: ## Delete any images.
