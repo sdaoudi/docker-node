@@ -1,0 +1,21 @@
+language: generic
+
+services:
+    - docker
+
+env:
+    matrix:
+        - NODE_VERSION=8
+        - NODE_VERSION=10
+
+script:
+    - make build
+
+deploy:
+    - provider: script
+      script: docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" && make push
+      on:
+          branch: master
+
+matrix:
+    fast_finish: true
