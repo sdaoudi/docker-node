@@ -14,19 +14,19 @@ image.
 
 Node.js 8 example:
 
-    $ docker run --rm -ti sdaoudi/node:8 node -v
+    $ docker run --rm -ti sdaoudi/node:8-alpine node -v
 
 ## Working directory ##
 
 You can use ``/src`` as a working directory:
 
-	$ docker run --rm -ti -v $(pwd):/src sdaoudi/node:8 ls -laF
+	$ docker run --rm -ti -v $(pwd):/src sdaoudi/node:8-alpine ls -laF
 
 ## Default user ##
 
 This docker image uses ``node`` as default user:
 
-	$ docker run --rm -ti sdaoudi/node:8 whoami
+	$ docker run --rm -ti sdaoudi/node:8-alpine whoami
 
 ## Build command ##
 
