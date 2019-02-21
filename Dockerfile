@@ -14,12 +14,21 @@ ENV NO_PROXY    $NO_PROXY
 ENV NPM_CONFIG_PREFIX   /home/node/.npm-global
 ENV PATH                $NPM_CONFIG_PREFIX/bin:$PATH
 
+RUN apk add --no-cache --virtual \
+        .gyp \
+        python \
+        make \
+        g++ \
+        ncurses-dev \
+        && rm -rf /var/cache/apk/*
+
 USER node
 
 RUN mkdir /home/node/.npm-global \
 	&& chown -R node:node /home/node/.npm-global \
     && npm install --quiet --no-progress -g \
     	gulp-cli \
-        tput
+        tput \
+        node-tput
 
 WORKDIR /src
