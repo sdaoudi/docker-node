@@ -3,6 +3,8 @@ SHELL = /bin/sh
 DOCKER ?= $(shell which docker)
 DOCKER_REPOSITORY := sdaoudi/node
 
+PROXY_CONFIG=--build-arg HTTP_PROXY=$(HTTP_PROXY) --build-arg HTTPS_PROXY=$(HTTPS_PROXY) --build-arg NO_PROXY=$(NO_PROXY)
+
 COM_COLOR   = \033[0;35m
 OBJ_COLOR   = \033[0;36m
 OK_COLOR    = \033[0;32m
@@ -10,11 +12,9 @@ ERROR_COLOR = \033[0;31m
 WARN_COLOR  = \033[0;33m
 NO_COLOR    = \033[m
 
-BUILD_ARGS := --build-arg BUILD_DATE=$(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
-
 NODE_VERSION?=10
 
-options?=--no-cache --pull
+BUILD_ARGS=--build-arg NODE_VERSION=$(NODE_VERSION)
 
 TARGETS:=$(MAKEFILE_LIST)
 
@@ -53,14 +53,14 @@ all: ## Do the action to all node.js version (8 & 10)
 
 #####
 build: ## Build an individual image (NODE_VERSION)
-	  ${DOCKER} build --tag ${DOCKER_REPOSITORY}:${NODE_VERSION} ${NODE_VERSION}
+	  ${DOCKER} build --no-cache ${PROXY_CONFIG} ${BUILD_ARGS} --tag ${DOCKER_REPOSITORY}:node-${NODE_VERSION}-alpine .
 
 #####
 deploy: push ## Deploy a specific version
 
 #####
 push: ## push a specific version (NODE_VERSION)
-	${DOCKER} push ${DOCKER_REPOSITORY}:${NODE_VERSION}
+	${DOCKER} push ${DOCKER_REPOSITORY}:node-${NODE_VERSION}-alpine
 
 #####
 clean: ## Delete any images.
