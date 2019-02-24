@@ -32,3 +32,8 @@ RUN mkdir /home/node/.npm-global \
         node-tput
 
 WORKDIR /src
+
+ADD entrypoint.sh /entrypoint
+
+ENTRYPOINT ["/entrypoint"]
+
