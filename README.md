@@ -26,6 +26,4 @@ You can use ``/srv`` as a working directory:
 
 You can build a node image with this command:
 
-```
-$ make build NODE_VERSION=8
-```
+    $ make build NODE_VERSION=8
