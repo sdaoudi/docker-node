@@ -5,14 +5,19 @@ gid=$(stat -c %g /srv)
 
 if [ $uid == 0 ] && [ $gid == 0 ]; then
     if [ $# -eq 0 ]; then
-        sleep 9999d
+        npm
     else
         exec "$@"
     fi
-fi
-
-if [ $# -eq 0 ]; then
-    sleep 9999d
 else
-    exec su-exec node "$@"
+    sed -i -r "s/node:x:\d+:\d+:/node:x:$uid:$gid:/g" /etc/passwd
+    sed -i -r "s/node:x:\d+:/node:x:$gid:/g" /etc/group
+    chown $uid:$gid /srv
+
+    user=$(grep ":x:$uid:" /etc/passwd | cut -d: -f1)
+    if [ $# -eq 0 ]; then
+        npm
+    else
+        exec su-exec $user "$@"
+    fi
 fi

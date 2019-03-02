@@ -18,15 +18,9 @@ Node.js 8 example:
 
 ## Working directory ##
 
-You can use ``/src`` as a working directory:
+You can use ``/srv`` as a working directory:
 
-	$ docker run --rm -ti -v $(pwd):/src sdaoudi/node:8-alpine ls -laF
-
-## Default user ##
-
-This docker image uses ``node`` as default user:
-
-	$ docker run --rm -ti sdaoudi/node:8-alpine whoami
+	$ docker run --rm -ti -v $(pwd):/srv sdaoudi/node:8-alpine ls -laF
 
 ## Build command ##
 
